@@ -1,4 +1,4 @@
-const {signupUser} = require("../services/auth")
+const {signupUser, loginUser} = require("../services/auth")
 
 const signup = async (req,res)=>{
     const response = await signupUser(req, res);
@@ -6,4 +6,9 @@ const signup = async (req,res)=>{
     return response;
 };
 
-module.exports = {signup}
+const login = async (req,res)=>{
+    const response = await loginUser(req,res);
+    return response;
+}
+
+module.exports = {signup, login}
