@@ -2,6 +2,8 @@ const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
 
+const connectDB = require("./config/db");
+
 dotenv.config();
 
 const app = express();
@@ -16,6 +18,8 @@ app.get("/", (req, res) => {
     message: "JanSetu Backend is running"
   });
 });
+
+connectDB();
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
