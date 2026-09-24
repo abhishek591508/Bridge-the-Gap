@@ -19,8 +19,21 @@ app.get("/", (req, res) => {
   });
 });
 
-connectDB();
+//connectDB(); is asynchronous.
+//A more robust startup pattern is to make the startup process wait for the database connection before declaring the application ready.
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+//The await means:
+// "Don't continue to the next line until the database connection is finished."
+const startServer = async () => {
+  try {
+    await connectDB();
+
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
+  } catch (error) {
+    console.error("Failed to start server");
+  }
+};
+
+startServer();
